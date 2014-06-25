@@ -5,8 +5,7 @@ autostart=true
 autorestart=true
 
 [program:node]
-command=/usr/bin/node /pumpio/src/bin/pump
+command=pump
 numprocs=1
-directory=/pumpio/src
 autostart=true
 autorestart=true
