@@ -1,4 +1,4 @@
-FROM devbox
+FROM michielbdejong/devbox
 RUN npm install -g pump.io
 RUN echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | tee -a /etc/apt/sources.list.d/10gen.list
 RUN apt-get update    
