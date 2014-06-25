@@ -27,7 +27,6 @@ RUN     mkdir /pumpio && git clone https://github.com/e14n/pump.io.git /pumpio/s
 RUN     cd /pumpio/src && npm install
 RUN     echo_supervisord_conf > /etc/supervisord.conf
 ADD     Supervisorfile/ /pumpio/
-ADD     pump.io.json/ /etc/
 RUN     echo "[include]\nfiles = /pumpio/Supervisorfile\n" >> /etc/supervisord.conf
 RUN     ln -s /data/pump.io/pump.io.json /etc/pump.io.json
 
