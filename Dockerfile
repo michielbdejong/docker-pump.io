@@ -18,10 +18,6 @@ ENV     DEBIAN_FRONTEND noninteractive
 RUN     apt-get install -y software-properties-common
 RUN     apt-get -y install software-properties-common wget sudo net-tools
 
-# Install  ssh server
-RUN      apt-get install -y openssh-server
-RUN      mkdir -p /var/run/sshd
-
 RUN     add-apt-repository ppa:chris-lea/node.js
 RUN     apt-get update
 RUN     apt-get -y install nodejs python make g++ mongodb-10gen python-pip git
@@ -33,7 +29,7 @@ RUN     echo_supervisord_conf > /etc/supervisord.conf
 ADD     Supervisorfile/ /pumpio/
 ADD     pump.io.json/ /etc/
 RUN     echo "[include]\nfiles = /pumpio/Supervisorfile\n" >> /etc/supervisord.conf
-RUN     mkdir -p /data/db
+RUN     ln -s /data/pump.io/pump.io.json /etc/pump.io.json
 
-EXPOSE  22 80
+EXPOSE  2001
 CMD ["/usr/local/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"] 

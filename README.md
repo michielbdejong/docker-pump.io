@@ -4,16 +4,15 @@
 
 1) Install docker
 
-2) clone  https://github.com/niktrix/docker-pump.io
+2) clone  https://github.com/michielbdejong/docker-pump.io
 
-3) go inside folder pump.io
+3) Set up a data container with:
+    /data/db (empty folder)
+    /data/pump.io/pump.io.json (with your settings, like pump.io.json.sample in this repo)
 
-4) configure pump.io.json as per your needs
+4) Build the image:
+    docker build -t pump.io docker-pump.io/
 
-5) build docker using
-docker builder .
-    // take care of context, of supervisord and pump.io.json
+5) This can only run on port 2001 because of how pump.io self-points its hyperlinks. Suppose your data container is called 'michiel-data', run:
 
-6)run docker
-
- docker run -p 22 -p 80:80 -t -v database:/data/db:rw  -v uploads:/var/local/pump.io/uploads:rw <Image Id>
+ docker run -p 2001:2001 -d --volumes-from michiel-data pump.io
